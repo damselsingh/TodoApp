@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">   
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <style>
+        body{
+            background-image: url(/static/images/bg2.png);
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center text-dark my-4">
+        <h1>TodoApp</h1>
+    </div>
+  <hr>
+    <div class="card col-md-10 mx-auto text-center">
+        <div class="card-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{forms.title}}
+                <input type="submit" class="btn btn-success" value="Create a Task">
+            </form>
+
+    <div class="container my-3">
+    {% for task in tasks %} 
+    {{task.id}} {{task}}
+        <form action="{% url 'delete' task.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+        <a class="btn btn-sm btn-warning mx-auto" href="{% url 'update' task.id %}">Edit</a>
+        </form> 
+        
+        <hr>
+    {% endfor %}
+</div>
+
+</div>
+</div>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>  
+</body>
+</html>
